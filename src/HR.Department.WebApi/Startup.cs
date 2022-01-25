@@ -23,6 +23,16 @@ namespace HR.Department.WebApi
 
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Cors", builder =>
+                {
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyOrigin();
+                });
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HR.Department.WebApi", Version = "v1" });
@@ -42,6 +52,8 @@ namespace HR.Department.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("Cors");
 
             app.UseAuthorization();
 

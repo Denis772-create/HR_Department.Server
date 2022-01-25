@@ -9,4 +9,8 @@
     <PackageReference Include="Ardalis.Specification" Version="5.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Specifications\" />
+  </ItemGroup>
+
 </Project>

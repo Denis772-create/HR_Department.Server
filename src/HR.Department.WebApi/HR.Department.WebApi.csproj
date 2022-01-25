@@ -1,10 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
 	    <PrivateAssets>all</PrivateAssets>
@@ -13,11 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Features\Employee\Comands\" />
+    <Folder Include="Features\Employee\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HR.Department.Infrastructure\HR.Department.Infrastructure.csproj" />
+    <ProjectReference Include="..\HRD.Core\HR.Department.Core.csproj" />
   </ItemGroup>
 
 </Project>
