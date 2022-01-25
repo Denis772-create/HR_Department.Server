@@ -10,7 +10,7 @@ namespace HR.Department.Core.Entities
         public Guid TypePositionId { get; private set; }
         public TypePosition TypePosition { get; private set; }
 
-        private readonly List<Employee> _employees = new List<Employee>();
+        private readonly List<Employee> _employees = new();
         public IReadOnlyCollection<Employee> Employees => _employees.AsReadOnly();
 
         public Position(string name, Guid typePositionId, TypePosition typePosition)
@@ -19,6 +19,7 @@ namespace HR.Department.Core.Entities
             TypePositionId = typePositionId;
             TypePosition = typePosition;
         }
+        public Position() { }
 
         public void AddEmployee(Employee employee)
         {

@@ -13,7 +13,7 @@ namespace HR.Department.Core.Entities
         public string Phone { get; private set; }
         public int Age { get; private set; }
 
-        private readonly List<Position> _positions = new List<Position>();
+        private readonly List<Position> _positions = new();
         public IReadOnlyCollection<Position> Positions => _positions.AsReadOnly();
         public Employee(string firstName,
             string surname,
@@ -27,6 +27,8 @@ namespace HR.Department.Core.Entities
             Phone = phone;
             Age = age;
         }
+
+        public Employee() { }
 
         public void UpdateAddress(Address address)
         {
