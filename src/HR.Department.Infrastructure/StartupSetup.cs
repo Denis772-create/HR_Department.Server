@@ -11,8 +11,11 @@ namespace HR.Department.Infrastructure
         public static void AddDbContext(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<DepartmentContext>(options =>
+            {
                 options.UseSqlServer(connectionString, b =>
-                    b.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name)));
+                    b.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name));
+                options.UseLazyLoadingProxies();
+            });
 
             services.AddScoped(typeof(IReadRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

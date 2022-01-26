@@ -14,7 +14,7 @@ namespace HR.Department.Core.Entities
         public int Age { get; private set; }
 
         private readonly List<Position> _positions = new();
-        public IReadOnlyCollection<Position> Positions => _positions.AsReadOnly();
+        public virtual IReadOnlyCollection<Position> Positions => _positions.AsReadOnly();
         public Employee(string firstName,
             string surname,
             Address address,

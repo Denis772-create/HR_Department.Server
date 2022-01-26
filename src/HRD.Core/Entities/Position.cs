@@ -8,10 +8,10 @@ namespace HR.Department.Core.Entities
     {
         public string Name { get; private set; }
         public Guid TypePositionId { get; private set; }
-        public TypePosition TypePosition { get; private set; }
+        public virtual TypePosition TypePosition { get; private set; }
 
         private readonly List<Employee> _employees = new();
-        public IReadOnlyCollection<Employee> Employees => _employees.AsReadOnly();
+        public virtual IReadOnlyCollection<Employee> Employees => _employees.AsReadOnly();
 
         public Position(string name, Guid typePositionId, TypePosition typePosition)
         {
@@ -25,6 +25,14 @@ namespace HR.Department.Core.Entities
         {
             if (!Employees.Any(em => em.Id == employee.Id))
                 _employees.Add(employee);
+        }
+
+        public void RemoveEmployee(Guid employeeId)
+        {
+            var employee = Employees.FirstOrDefault(e => e.Id == employeeId);
+
+            if (employee != null)
+                _employees.Remove(employee);
         }
     }
 }
