@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HR.Department.Core.Entities;
+using HR.Department.WebApi.Features.Employee.Queries.GetEmployeeListByIdPosition;
+using HR.Department.WebApi.Features.Position.Comands.UpdateSalaryForEmloyees;
 using HR.Department.WebApi.Modes;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +9,15 @@ namespace HR.Department.WebApi.Controllers
 {
     public class EmployeeController : BaseController
     {
-        [HttpGet]
-        public async Task<ActionResult<EmployeeListVm>> GetByIdPosition([FromQuery] Guid id) =>
-        Ok(await Mediator.Send())
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EmployeeListVm>> GetByIdPosition(Guid id) =>
+            Ok(await Mediator.Send(new GetEmployeeListByIdPositionQuery
+            {
+                PositionId = id
+            }));
+
+        [HttpPut]
+        public async Task<ActionResult<int>> GetNumberUpdatedSalaries() =>
+            await Mediator.Send(new UpdateSalaryForEmloyeesCommand());
     }
 }

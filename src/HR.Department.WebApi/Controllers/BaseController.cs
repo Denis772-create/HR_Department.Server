@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HR.Department.WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class BaseController : ControllerBase
     {
         private IMediator _mediator;

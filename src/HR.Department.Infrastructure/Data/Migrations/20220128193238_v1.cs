@@ -18,7 +18,8 @@ namespace HR.Department.Infrastructure.Data.Migrations
                     Address_City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Address_Country = table.Column<string>(type: "nvarchar(90)", maxLength: 90, nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Age = table.Column<int>(type: "int", nullable: false)
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    RequiredSalary = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,33 +58,35 @@ namespace HR.Department.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeePosition",
+                name: "PositionEmployee",
                 columns: table => new
                 {
-                    EmployeesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PositionsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    PositionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 500m),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeePosition", x => new { x.EmployeesId, x.PositionsId });
+                    table.PrimaryKey("PK_PositionEmployee", x => new { x.PositionId, x.EmployeeId });
                     table.ForeignKey(
-                        name: "FK_EmployeePosition_Employees_EmployeesId",
-                        column: x => x.EmployeesId,
+                        name: "FK_PositionEmployee_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeePosition_Positions_PositionsId",
-                        column: x => x.PositionsId,
+                        name: "FK_PositionEmployee_Positions_PositionId",
+                        column: x => x.PositionId,
                         principalTable: "Positions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeePosition_PositionsId",
-                table: "EmployeePosition",
-                column: "PositionsId");
+                name: "IX_PositionEmployee_EmployeeId",
+                table: "PositionEmployee",
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Positions_TypePositionId",
@@ -94,7 +97,7 @@ namespace HR.Department.Infrastructure.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployeePosition");
+                name: "PositionEmployee");
 
             migrationBuilder.DropTable(
                 name: "Employees");

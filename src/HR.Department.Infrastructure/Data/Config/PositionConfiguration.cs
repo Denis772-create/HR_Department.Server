@@ -8,6 +8,28 @@ namespace HR.Department.Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Position> builder)
         {
+            //var navigation = builder.Metadata.FindNavigation(nameof(Position.Employees));
+            //navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.HasMany(p => p.Employees)
+                .WithMany(e => e.Positions)
+                .UsingEntity<PositionEmployee>(
+                    j => j
+                        .HasOne(pe => pe.Employee)
+                        .WithMany()
+                        .HasForeignKey(pe => pe.EmployeeId),
+                    j => j
+                        .HasOne(pe => pe.Position)
+                        .WithMany()
+                        .HasForeignKey(pe => pe.PositionId),
+                    j =>
+                    {
+                        j.Property(pe => pe.Salary)
+                            .HasColumnType("decimal(18,2")
+                            .HasDefaultValue(500);
+                        j.HasKey(t => new { t.PositionId, t.EmployeeId });
+                    });
+
 
             builder.Property(p => p.TypePositionId)
                 .IsRequired()

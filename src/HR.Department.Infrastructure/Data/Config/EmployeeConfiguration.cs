@@ -8,6 +8,13 @@ namespace HR.Department.Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
+            //var navigation = builder.Metadata.FindNavigation(nameof(Employee.Positions));
+            //navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
+            
+            builder.Property(e => e.RequiredSalary)
+                .HasColumnType("decimal(18,2")
+                .IsRequired();
+
             builder.Property(e => e.FirstName)
                 .IsRequired();
 

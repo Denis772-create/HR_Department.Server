@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -5,6 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using HR.Department.Infrastructure;
+using HR.Department.WebApi.Behaviors;
+using HR.Department.WebApi.Mappings;
+using MediatR;
+using Newtonsoft.Json;
 
 namespace HR.Department.WebApi
 {
@@ -19,7 +24,15 @@ namespace HR.Department.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+            services.AddAutoMapper(config =>
+                config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly())));
 
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 
@@ -45,7 +58,7 @@ namespace HR.Department.WebApi
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => 
+                app.UseSwaggerUI(c =>
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "HR.Department.WebApi v1"));
             }
 

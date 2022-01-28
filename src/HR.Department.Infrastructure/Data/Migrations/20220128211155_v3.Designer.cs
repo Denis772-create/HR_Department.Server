@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HR.Department.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DepartmentContext))]
-    [Migration("20220125163756_v1")]
-    partial class v1
+    [Migration("20220128211155_v3")]
+    partial class v3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,21 +20,6 @@ namespace HR.Department.Infrastructure.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EmployeePosition", b =>
-                {
-                    b.Property<Guid>("EmployeesId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PositionsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("EmployeesId", "PositionsId");
-
-                    b.HasIndex("PositionsId");
-
-                    b.ToTable("EmployeePosition");
-                });
 
             modelBuilder.Entity("HR.Department.Core.Entities.Employee", b =>
                 {
@@ -52,6 +37,9 @@ namespace HR.Department.Infrastructure.Data.Migrations
                     b.Property<string>("Phone")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<decimal>("RequiredSalary")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
@@ -82,6 +70,29 @@ namespace HR.Department.Infrastructure.Data.Migrations
                     b.ToTable("Positions");
                 });
 
+            modelBuilder.Entity("HR.Department.Core.Entities.PositionEmployee", b =>
+                {
+                    b.Property<Guid>("PositionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Salary")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(500m);
+
+                    b.HasKey("PositionId", "EmployeeId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("PositionEmployees");
+                });
+
             modelBuilder.Entity("HR.Department.Core.Entities.TypePosition", b =>
                 {
                     b.Property<Guid>("Id")
@@ -95,21 +106,6 @@ namespace HR.Department.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Types");
-                });
-
-            modelBuilder.Entity("EmployeePosition", b =>
-                {
-                    b.HasOne("HR.Department.Core.Entities.Employee", null)
-                        .WithMany()
-                        .HasForeignKey("EmployeesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HR.Department.Core.Entities.Position", null)
-                        .WithMany()
-                        .HasForeignKey("PositionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("HR.Department.Core.Entities.Employee", b =>
@@ -154,6 +150,25 @@ namespace HR.Department.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("TypePosition");
+                });
+
+            modelBuilder.Entity("HR.Department.Core.Entities.PositionEmployee", b =>
+                {
+                    b.HasOne("HR.Department.Core.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HR.Department.Core.Entities.Position", "Position")
+                        .WithMany()
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Position");
                 });
 #pragma warning restore 612, 618
         }

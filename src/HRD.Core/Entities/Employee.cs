@@ -12,6 +12,7 @@ namespace HR.Department.Core.Entities
         public Address Address { get; private set; }
         public string Phone { get; private set; }
         public int Age { get; private set; }
+        public decimal RequiredSalary { get; private set; }
 
         private readonly List<Position> _positions = new();
         public virtual IReadOnlyCollection<Position> Positions => _positions.AsReadOnly();
@@ -19,16 +20,19 @@ namespace HR.Department.Core.Entities
             string surname,
             Address address,
             string phone,
-            int age)
+            int age,
+            decimal defaultSalary)
         {
             FirstName = firstName;
             Surname = surname;
             Address = address;
             Phone = phone;
             Age = age;
+            RequiredSalary = defaultSalary;
         }
 
-        public Employee() { }
+        public Employee()
+        { }
 
         public void UpdateAddress(Address address)
         {

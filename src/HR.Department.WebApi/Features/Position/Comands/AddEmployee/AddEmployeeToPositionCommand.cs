@@ -13,5 +13,6 @@ namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
         public string Country { get;  set; }
         public string Phone { get;  set; }
         public int Age { get;  set; }
+        public decimal RequiredSalary { get; set; }
     }
 }

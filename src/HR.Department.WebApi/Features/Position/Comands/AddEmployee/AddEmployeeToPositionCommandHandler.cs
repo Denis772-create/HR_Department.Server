@@ -16,14 +16,15 @@ namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
 
         public async Task<Unit> Handle(AddEmployeeToPositionCommand request, CancellationToken cancellationToken)
         {
-            var position = await _repository.GetByIdAsync<Guid>(request.PositionId, cancellationToken);
+            var position = await _repository.GetByIdAsync(request.PositionId, cancellationToken);
 
             position.AddEmployee(new Core.Entities.Employee(
                 request.FirstName,
                 request.Surname,
                 new Address(request.Street, request.City, request.Country),
                 request.Phone,
-                request.Age));
+                request.Age,
+                request.RequiredSalary));
 
             await _repository.SaveChangesAsync(cancellationToken);
 

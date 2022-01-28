@@ -4,14 +4,16 @@ using HR.Department.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HR.Department.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DepartmentContext))]
-    partial class DepartmentContextModelSnapshot : ModelSnapshot
+    [Migration("20220128193238_v1")]
+    partial class v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +90,7 @@ namespace HR.Department.Infrastructure.Data.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("PositionEmployees");
+                    b.ToTable("PositionEmployee");
                 });
 
             modelBuilder.Entity("HR.Department.Core.Entities.TypePosition", b =>

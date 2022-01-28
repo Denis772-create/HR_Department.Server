@@ -31,7 +31,9 @@ namespace HR.Department.WebApi.Features.Employee.Queries.GetEmployeeListByIdPosi
             var employListSpecification = new EmployeesSpecification(request.PositionId);
             var listEmpl = await _repository.ListAsync(employListSpecification, cancellationToken);
 
-            return _mapper.Map<EmployeeListVm>(listEmpl);
+            var listEmplVm = _mapper.Map<List<EmployeeDto>>(listEmpl);
+
+            return await Task.FromResult(new EmployeeListVm { EmployeeList = listEmplVm });
         }
     }
 }

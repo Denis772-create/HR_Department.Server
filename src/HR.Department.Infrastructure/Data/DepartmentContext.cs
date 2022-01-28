@@ -10,6 +10,7 @@ namespace HR.Department.Infrastructure.Data
         public DbSet<Position> Positions { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<TypePosition> Types { get; set; }
+        public DbSet<PositionEmployee> PositionEmployees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
