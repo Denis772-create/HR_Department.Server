@@ -23,8 +23,9 @@ namespace HR.Department.WebApi.Features.Employee.Comands.Update
         public async Task<Unit> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employee = await _repository.GetByIdAsync(request.Id, cancellationToken);
+            var address = _mapper.Map<Address>(request.Address);
 
-            employee.UpdateAddress(new Address(request.Street, request.City, request.Country));
+            employee.UpdateAddress(address);
             await _repository.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

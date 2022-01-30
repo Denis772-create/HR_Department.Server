@@ -82,7 +82,7 @@ namespace HR.Department.Infrastructure.Data.Migrations
                     b.Property<decimal>("Salary")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(500m);
+                        .HasDefaultValue(300m);
 
                     b.HasKey("PositionId", "EmployeeId");
 

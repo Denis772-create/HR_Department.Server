@@ -26,7 +26,7 @@ namespace HR.Department.Infrastructure.Data.Config
                     {
                         j.Property(pe => pe.Salary)
                             .HasColumnType("decimal(18,2")
-                            .HasDefaultValue(500);
+                            .HasDefaultValue(300);
                         j.HasKey(t => new { t.PositionId, t.EmployeeId });
                     });
 

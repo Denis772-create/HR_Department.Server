@@ -1,5 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.Specification;
 using HR.Department.Core.Interfaces;
 using MediatR;
 
@@ -16,8 +19,11 @@ namespace HR.Department.WebApi.Features.Position.Comands.DeleteEmployee
         {
             var position = await _repository.GetByIdAsync(request.PositionId, cancellationToken);
 
-            position.RemoveEmployee(request.EmployeeId);
-            await _repository.SaveChangesAsync(cancellationToken);
+            if (position != null)
+            {
+                position.RemoveEmployee(request.EmployeeId);
+                await _repository.SaveChangesAsync(cancellationToken);
+            }
 
             return Unit.Value;
         }

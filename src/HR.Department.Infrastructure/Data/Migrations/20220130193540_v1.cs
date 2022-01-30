@@ -58,25 +58,25 @@ namespace HR.Department.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PositionEmployee",
+                name: "PositionEmployees",
                 columns: table => new
                 {
                     PositionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EmployeeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 500m),
+                    Salary = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 300m),
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PositionEmployee", x => new { x.PositionId, x.EmployeeId });
+                    table.PrimaryKey("PK_PositionEmployees", x => new { x.PositionId, x.EmployeeId });
                     table.ForeignKey(
-                        name: "FK_PositionEmployee_Employees_EmployeeId",
+                        name: "FK_PositionEmployees_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PositionEmployee_Positions_PositionId",
+                        name: "FK_PositionEmployees_Positions_PositionId",
                         column: x => x.PositionId,
                         principalTable: "Positions",
                         principalColumn: "Id",
@@ -84,8 +84,8 @@ namespace HR.Department.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PositionEmployee_EmployeeId",
-                table: "PositionEmployee",
+                name: "IX_PositionEmployees_EmployeeId",
+                table: "PositionEmployees",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
@@ -97,7 +97,7 @@ namespace HR.Department.Infrastructure.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PositionEmployee");
+                name: "PositionEmployees");
 
             migrationBuilder.DropTable(
                 name: "Employees");

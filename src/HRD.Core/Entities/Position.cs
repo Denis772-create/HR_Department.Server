@@ -13,16 +13,14 @@ namespace HR.Department.Core.Entities
         private readonly List<Employee> _employees = new();
         public virtual IReadOnlyCollection<Employee> Employees => _employees.AsReadOnly();
 
-        public Position(string name, Guid typePositionId, TypePosition typePosition)
+        public Position(string name, Guid typePositionId)
         {
             Name = name;
             TypePositionId = typePositionId;
-            TypePosition = typePosition;
         }
         public Position() { }
 
-        public void AddEmployee(Employee employee)
-        {
+        public void AddEmployee(Employee employee) {
             if (!Employees.Any(em => em.Id == employee.Id))
                 _employees.Add(employee);
         }

@@ -1,8 +1,12 @@
 ﻿using System;
+using AutoMapper;
+using HR.Department.Core.Entities;
+using HR.Department.WebApi.Features.Position.Comands.AddEmployee;
+using HR.Department.WebApi.Mappings;
 
 namespace HR.Department.WebApi.Modes
 {
-    public class EmployeeForAddingDto
+    public class EmployeeForAddingDto : IMapWith<Employee>
     {
         public Guid PositionId { get; set; }
         public string FirstName { get; set; }
@@ -13,5 +17,10 @@ namespace HR.Department.WebApi.Modes
         public string Phone { get; set; }
         public int Age { get; set; }
         public decimal RequiredSalary { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<EmployeeForAddingDto, AddEmployeeToPositionCommand>();
+        }
     }
 }

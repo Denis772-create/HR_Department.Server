@@ -9,6 +9,7 @@ using HR.Department.Infrastructure;
 using HR.Department.WebApi.Behaviors;
 using HR.Department.WebApi.Mappings;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace HR.Department.WebApi
@@ -33,6 +34,9 @@ namespace HR.Department.WebApi
 
             services.AddAutoMapper(config =>
                 config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly())));
+
+            services.Configure<ApiBehaviorOptions>(options =>
+                options.SuppressModelStateInvalidFilter = true);
 
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
 

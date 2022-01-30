@@ -6,13 +6,19 @@ namespace HR.Department.WebApi.Modes
 {
     public class EmployeeDto : IMapWith<Employee>
     {
-        public string FirstName { get; private set; }
-        public string Surname { get; private set; }
-        public string Phone { get; private set; }
+        public string FirstName { get; set; }
+        public string Surname { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Phone { get; set; }
+        public int Age { get; set; }
+        public decimal RequiredSalary { get; set; }
+
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Employee, EmployeeDto>();
+            profile.CreateMap<Employee, EmployeeDto>().ReverseMap();
         }
     }
 }

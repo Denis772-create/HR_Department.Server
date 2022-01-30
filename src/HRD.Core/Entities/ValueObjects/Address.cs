@@ -2,13 +2,13 @@
 {
     public class Address
     {
-        public string Street { get; private set; }
+        public string Street { get; }
 
-        public string City { get; private set; }
+        public string City { get; }
 
-        public string Country { get; private set; }
+        public string Country { get; }
 
-        private Address() { }
+        public Address() { }
 
         public Address(string street, string city, string country)
         {

@@ -8,9 +8,9 @@ namespace HR.Department.WebApi.Features.Employee.Comands.Update
         public UpdateEmployeeCommandValidator()
         {
             RuleFor(command => command.Id).NotEqual(Guid.Empty);
-            RuleFor(command => command.City).NotEmpty().MaximumLength(180);
-            RuleFor(command => command.Country).NotEmpty().MaximumLength(90);
-            RuleFor(command => command.Street).NotEmpty().MaximumLength(100);
+            RuleFor(command => command.Address.City).NotEmpty().MaximumLength(180);
+            RuleFor(command => command.Address.Country).NotEmpty().MaximumLength(90);
+            RuleFor(command => command.Address.Street).NotEmpty().MaximumLength(100);
         }
     }
 }

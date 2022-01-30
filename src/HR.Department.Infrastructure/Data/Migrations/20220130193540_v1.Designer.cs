@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HR.Department.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DepartmentContext))]
-    [Migration("20220128211155_v3")]
-    partial class v3
+    [Migration("20220130193540_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,7 +84,7 @@ namespace HR.Department.Infrastructure.Data.Migrations
                     b.Property<decimal>("Salary")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(500m);
+                        .HasDefaultValue(300m);
 
                     b.HasKey("PositionId", "EmployeeId");
 
