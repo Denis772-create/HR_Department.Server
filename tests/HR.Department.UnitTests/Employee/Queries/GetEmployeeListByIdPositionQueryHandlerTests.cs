@@ -1,13 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.Specification;
+using FluentAssertions;
+using HR.Department.Core.Interfaces;
+using HR.Department.Core.Specifications;
+using HR.Department.UnitTests.Common;
+using HR.Department.WebApi.Features.Employee.Queries.GetEmployeeListByIdPosition;
+using HR.Department.WebApi.Modes;
+using NSubstitute;
+using Xunit;
 
 namespace HR.Department.UnitTests.Employee.Queries
 {
-    public class GetEmployeeListByIdPositionQueryHandlerTests
+    public class GetEmployeeListByIdPositionQueryHandlerTests : BaseTest
     {
-        
+        [Fact]
+        public async Task GetEmployeeListByIdPositionQueryHandler_Success()
+        {
+            // Arrange
+            var lisEmployees = Context.Employees
+                .Where(e => e.Positions
+                    .Select(p => p.Id)
+                    .Contains(DepartmentContextFactory.PositionAId))
+                .ToList();
+            var repository = Substitute.For<IRepository<Core.Entities.Employee>>();
+            repository.ListAsync(specification: default).ReturnsForAnyArgs(Task.FromResult(lisEmployees));
+
+            var handler = new GetEmployeeListByIdPositionQueryHandler(repository, Mapper);
+
+            //Act
+            var result = await handler.Handle(
+                new GetEmployeeListByIdPositionQuery
+                {
+                    PositionId = DepartmentContextFactory.PositionAId
+                }, CancellationToken.None);
+
+            //Assert
+            result.EmployeeList.Count.Should().Be(1);
+            result.Should().BeOfType(typeof(EmployeeListVm));
+
+        }
     }
 }

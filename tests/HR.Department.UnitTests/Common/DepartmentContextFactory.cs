@@ -10,6 +10,13 @@ namespace HR.Department.UnitTests.Common
 {
     public class DepartmentContextFactory
     {
+        public static Guid EmployeeAId;
+        public static Guid EmployeeBId;
+        public static Guid EmployeeCId;
+
+        public static Guid PositionAId;
+        public static Guid PositionBId;
+
         public static DepartmentContext Create()
         {
             var options = new DbContextOptionsBuilder<DepartmentContext>()
@@ -28,6 +35,16 @@ namespace HR.Department.UnitTests.Common
             context.PositionEmployees.AddRange(GetPreconfiguredPositionEmployees(context));
             context.SaveChanges();
             return context;
+        }
+
+        public static void SetFakeMembers(DepartmentContext context)
+        {
+            EmployeeAId = context.Employees.First().Id;
+            EmployeeBId = context.Employees.Skip(1).First().Id;
+            EmployeeCId = context.Employees.Skip(2).First().Id;
+
+            PositionAId = context.Positions.First().Id;
+            PositionBId = context.Employees.Skip(1).First().Id;
         }
 
         static IEnumerable<TypePosition> GetPreconfiguredTypes()

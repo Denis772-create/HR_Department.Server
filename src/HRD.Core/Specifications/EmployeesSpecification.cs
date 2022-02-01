@@ -11,5 +11,7 @@ namespace HR.Department.Core.Specifications
         {
             Query.Where(e => e.Positions.Select(p => p.Id).Contains(id));
         }
+
+
     }
 }

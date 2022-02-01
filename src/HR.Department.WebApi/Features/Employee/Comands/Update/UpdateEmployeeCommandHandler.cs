@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using HR.Department.Core.Entities.ValueObjects;
+using HR.Department.Core.Exeptions;
 using HR.Department.Core.Interfaces;
 using MediatR;
 
@@ -23,6 +24,10 @@ namespace HR.Department.WebApi.Features.Employee.Comands.Update
         public async Task<Unit> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employee = await _repository.GetByIdAsync(request.Id, cancellationToken);
+
+            if (employee == null)
+                throw new NotFoundException(nameof(Core.Entities.Employee), request.Id);
+
             var address = _mapper.Map<Address>(request.Address);
 
             employee.UpdateAddress(address);

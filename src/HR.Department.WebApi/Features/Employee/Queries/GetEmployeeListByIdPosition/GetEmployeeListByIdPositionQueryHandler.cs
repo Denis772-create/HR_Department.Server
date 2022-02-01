@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using HR.Department.Core.Exeptions;
 using HR.Department.Core.Interfaces;
 using HR.Department.Core.Specifications;
 using HR.Department.Infrastructure.Data;
@@ -26,10 +27,14 @@ namespace HR.Department.WebApi.Features.Employee.Queries.GetEmployeeListByIdPosi
             _mapper = mapper;
         }
 
-        public async Task<EmployeeListVm> Handle(GetEmployeeListByIdPositionQuery request, CancellationToken cancellationToken)
+        public async Task<EmployeeListVm> Handle(GetEmployeeListByIdPositionQuery request, 
+            CancellationToken cancellationToken)
         {
             var employListSpecification = new EmployeesSpecification(request.PositionId);
             var listEmpl = await _repository.ListAsync(employListSpecification, cancellationToken);
+
+            if (listEmpl == null)
+                throw new NotFoundException(nameof(List<Core.Entities.Employee>), default);
 
             var listEmplVm = _mapper.Map<List<EmployeeDto>>(listEmpl);
 

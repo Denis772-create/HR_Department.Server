@@ -10,7 +10,7 @@ namespace HR.Department.Core.Entities
         public string FirstName { get; private set; }
         public string Surname { get; private set; }
         public Address Address { get; private set; }
-        public string Phone { get; private set; }
+        public virtual string Phone { get;  set; }
         public int Age { get; private set; }
         public decimal RequiredSalary { get; private set; }
 
