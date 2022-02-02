@@ -25,7 +25,7 @@ namespace HR.Department.WebApi.Controllers
             Ok(await Mediator.Send(new CreateEmployeeCommand { EmployeeDto = employee }));
 
         [HttpPut]
-        public async Task<ActionResult<int>> GetNumberUpdatedSalaries() =>
+        public async Task<ActionResult<int>> UpdatedSalaries() =>
             Ok(await Mediator.Send(new UpdateSalaryForEmloyeesCommand()));
 
         [HttpPut("{id}")]

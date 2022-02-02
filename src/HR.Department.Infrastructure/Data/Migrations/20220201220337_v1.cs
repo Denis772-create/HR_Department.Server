@@ -44,6 +44,7 @@ namespace HR.Department.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TypePositionId = table.Column<Guid>(type: "uniqueidentifier", maxLength: 256, nullable: false)
                 },
                 constraints: table =>

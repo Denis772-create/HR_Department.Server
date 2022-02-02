@@ -95,8 +95,8 @@ namespace HR.Department.Infrastructure.Data
 
             return new List<Position>
             {
-                new(".NET Developer", _dbContext.Types.FirstOrDefault().Id),
-                new("Java Developer", _dbContext.Types.FirstOrDefault().Id)
+                new(".NET Developer", _dbContext.Types.FirstOrDefault().Id, "lorem ipsum dolor sit"),
+                new("Java Developer", _dbContext.Types.FirstOrDefault().Id, "amet consectetur adipiscing")
             };
         }
     }

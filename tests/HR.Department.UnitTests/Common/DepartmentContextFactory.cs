@@ -61,8 +61,8 @@ namespace HR.Department.UnitTests.Common
 
             return new List<Core.Entities.Position>
             {
-                new(".NET Developer", dbContext.Types.FirstOrDefault().Id),
-                new("Java Developer", dbContext.Types.FirstOrDefault().Id)
+                new(".NET Developer", dbContext.Types.FirstOrDefault().Id, "lorem ipsum dolor"),
+                new("Java Developer", dbContext.Types.FirstOrDefault().Id, " sit amet adipiscing")
             };
         }
 
