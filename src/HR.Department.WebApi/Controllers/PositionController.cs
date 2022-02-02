@@ -4,6 +4,7 @@ using AutoMapper;
 using HR.Department.WebApi.Features.Position.Comands.AddEmployee;
 using HR.Department.WebApi.Features.Position.Comands.CreatePosition;
 using HR.Department.WebApi.Features.Position.Comands.DeleteEmployee;
+using HR.Department.WebApi.Features.Position.Comands.DeletePosition;
 using HR.Department.WebApi.Features.Position.Comands.UpdatePosition;
 using HR.Department.WebApi.Features.Position.Queries.GetAllTypePositions;
 using HR.Department.WebApi.Features.Position.Queries.GetPositionList;
@@ -51,6 +52,10 @@ namespace HR.Department.WebApi.Controllers
             var command = _mapper.Map<UpdatePositionCommand>(forUpdateDto);
             return Ok(await Mediator.Send(command));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePosition(Guid id) =>
+            Ok(await Mediator.Send(new DeletePositionCommand() {Id = id}));
 
         [HttpDelete("{positionId}/{employeeId}")]
         public async Task<IActionResult> DeleteEmployee(Guid positionId, Guid employeeId) =>

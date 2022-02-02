@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using HR.Department.Core.Entities;
 using HR.Department.WebApi.Mappings;
 
@@ -6,6 +7,7 @@ namespace HR.Department.WebApi.Modes
 {
     public class EmployeeDto : IMapWith<Employee>
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public string Street { get; set; }
@@ -18,7 +20,16 @@ namespace HR.Department.WebApi.Modes
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Employee, EmployeeDto>().ReverseMap();
+            profile.CreateMap<Employee, EmployeeDto>().ForMember(dto => dto.Country,
+                config =>
+                    config.MapFrom(r => r.Address.Country))
+                .ForMember(dto => dto.City,
+                    config =>
+                        config.MapFrom(r => r.Address.City))
+                .ForMember(dto => dto.Street,
+                    config =>
+                        config.MapFrom(r => r.Address.Street))
+                .ReverseMap();
         }
     }
 }

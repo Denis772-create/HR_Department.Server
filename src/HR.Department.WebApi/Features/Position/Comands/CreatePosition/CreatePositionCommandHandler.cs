@@ -21,8 +21,6 @@ namespace HR.Department.WebApi.Features.Position.Comands.CreatePosition
                 request.TypePositionId,
                 request.Description), cancellationToken);
 
-            await _repository.SaveChangesAsync(cancellationToken);
-
             return Unit.Value;
         }
     }

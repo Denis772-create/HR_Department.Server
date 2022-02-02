@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using HR.Department.Core.Exeptions;
 using HR.Department.Core.Interfaces;
@@ -24,7 +23,6 @@ namespace HR.Department.WebApi.Features.Position.Comands.UpdatePosition
                 throw new NotFoundException(default, default);
 
             positionEntity.Update(request.Name, request.Description);
-            await _repository.UpdateAsync(positionEntity, cancellationToken);
             await _repository.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

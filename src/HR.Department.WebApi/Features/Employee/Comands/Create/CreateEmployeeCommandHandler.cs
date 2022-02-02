@@ -24,7 +24,6 @@ namespace HR.Department.WebApi.Features.Employee.Comands.Create
             var employeeEntity = _mapper.Map<Core.Entities.Employee>(request.EmployeeDto);
             
             await _repository.AddAsync(employeeEntity, cancellationToken);
-            await _repository.SaveChangesAsync(cancellationToken);
 
             return request.EmployeeDto;
         }
