@@ -3,7 +3,7 @@ using MediatR;
 
 namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
 {
-    public class AddEmployeeToPositionCommand : IRequest
+    public class AddNewEmployeeToPositionCommand : IRequest
     {
         public Guid PositionId { get; set; }
         public string FirstName { get;  set; }

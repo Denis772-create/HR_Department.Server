@@ -8,12 +8,12 @@ using MediatR;
 
 namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
 {
-    public class AddEmployeeToPositionCommandHandler : IRequestHandler<AddEmployeeToPositionCommand>
+    public class AddNewEmployeeToPositionCommandHandler : IRequestHandler<AddNewEmployeeToPositionCommand>
     {
         private readonly IRepository<Core.Entities.Position> _posRepository;
         private readonly IRepository<Core.Entities.Employee> _emplRepository;
 
-        public AddEmployeeToPositionCommandHandler(IRepository<Core.Entities.Position> posRepository,
+        public AddNewEmployeeToPositionCommandHandler(IRepository<Core.Entities.Position> posRepository,
             IRepository<Core.Entities.Employee> emplRepository)
         {
             _posRepository = posRepository;
@@ -21,7 +21,7 @@ namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
         }
 
 
-        public async Task<Unit> Handle(AddEmployeeToPositionCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(AddNewEmployeeToPositionCommand request, CancellationToken cancellationToken)
         {
             var position = await _posRepository.GetByIdAsync(request.PositionId, cancellationToken);
 
@@ -38,8 +38,9 @@ namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
                     request.Age,
                     request.RequiredSalary));
             }
+            else
+                position.AddEmployee(employee);
 
-            position.AddEmployee(employee);
             await _posRepository.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

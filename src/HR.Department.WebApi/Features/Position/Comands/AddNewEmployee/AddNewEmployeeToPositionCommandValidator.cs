@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
 {
-    public class AddEmployeeToPositionCommandValidator : AbstractValidator<AddEmployeeToPositionCommand>
+    public class AddNewEmployeeToPositionCommandValidator : AbstractValidator<AddNewEmployeeToPositionCommand>
     {
-        public AddEmployeeToPositionCommandValidator()
+        public AddNewEmployeeToPositionCommandValidator()
         {
             RuleFor(command => command.PositionId).NotEqual(Guid.Empty);
             RuleFor(command => command.Phone).NotEmpty();

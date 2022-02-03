@@ -20,7 +20,7 @@ namespace HR.Department.WebApi.Modes
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<EmployeeForAddingDto, AddEmployeeToPositionCommand>();
+            profile.CreateMap<EmployeeForAddingDto, AddNewEmployeeToPositionCommand>();
         }
     }
 }

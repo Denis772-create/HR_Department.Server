@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using HR.Department.WebApi.Features.Employee.Comands.Create;
 using HR.Department.WebApi.Features.Employee.Comands.Update;
+using HR.Department.WebApi.Features.Employee.Queries.GetAllQuery;
 using HR.Department.WebApi.Features.Employee.Queries.GetEmployeeListByIdPosition;
 using HR.Department.WebApi.Features.Position.Comands.UpdateSalaryForEmloyees;
 using HR.Department.WebApi.Filters.ActionFilters;
@@ -12,6 +13,10 @@ namespace HR.Department.WebApi.Controllers
 {
     public class EmployeeController : BaseController
     {
+        [HttpGet]
+        public async Task<ActionResult<EmployeeListVm>> GetAll() =>
+            Ok(await Mediator.Send(new GetEmployeeListQuery()));
+
         [HttpGet("{id}")]
         public async Task<ActionResult<EmployeeListVm>> GetByIdPosition(Guid id) =>
             Ok(await Mediator.Send(new GetEmployeeListByIdPositionQuery
