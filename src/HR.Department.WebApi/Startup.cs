@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using HR.Department.Infrastructure;
 using HR.Department.WebApi.Behaviors;
 using HR.Department.WebApi.Mappings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using HR.Department.WebApi.Extensions;
 
 namespace HR.Department.WebApi
 {
@@ -39,21 +39,9 @@ namespace HR.Department.WebApi
                 options.SuppressModelStateInvalidFilter = true);
 
             services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("Cors", builder =>
-                {
-                    builder.AllowAnyHeader();
-                    builder.AllowAnyMethod();
-                    builder.AllowAnyOrigin();
-                });
-            });
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HR.Department.WebApi", Version = "v1" });
-            });
+            services.ConfigureJwt(Configuration);
+            services.ConfigureCors();
+            services.ConfigureSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -72,6 +60,7 @@ namespace HR.Department.WebApi
 
             app.UseCors("Cors");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
