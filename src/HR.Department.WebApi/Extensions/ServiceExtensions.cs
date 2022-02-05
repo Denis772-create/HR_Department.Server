@@ -37,7 +37,7 @@ namespace HR.Department.WebApi.Extensions
                 {
                     config.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ClockSkew = TimeSpan.FromSeconds(60),
+                        ClockSkew = TimeSpan.FromSeconds(5),
                         ValidateAudience = false
                     };
 
