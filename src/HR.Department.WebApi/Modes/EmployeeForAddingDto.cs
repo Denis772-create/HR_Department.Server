@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using HR.Department.Core.Entities;
-using HR.Department.WebApi.Features.Position.Comands.AddEmployee;
+using HR.Department.WebApi.Features.Position.Comands.AddNewEmployee;
 using HR.Department.WebApi.Mappings;
 
 namespace HR.Department.WebApi.Modes

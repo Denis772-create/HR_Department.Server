@@ -20,16 +20,33 @@ namespace HR.Department.WebApi.Modes
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Employee, EmployeeDto>().ForMember(dto => dto.Country,
-                config =>
-                    config.MapFrom(r => r.Address.Country))
+            profile.CreateMap<Employee, EmployeeDto>()
+                .ForMember(dto => dto.Country,
+                    config =>
+                        config.MapFrom(r => r.Address.Country))
                 .ForMember(dto => dto.City,
                     config =>
                         config.MapFrom(r => r.Address.City))
                 .ForMember(dto => dto.Street,
                     config =>
-                        config.MapFrom(r => r.Address.Street))
-                .ReverseMap();
+                        config.MapFrom(r => r.Address.Street));
+
+            profile.CreateMap<EmployeeDto, Employee>()
+                //.ForMember(dto => dto.Address.Country,
+                //    config =>
+                //        config.MapFrom(r => r.Country))
+                //.ForMember(dto => dto.Address.City,
+                //    config =>
+                //        config.MapFrom(r => r.City))
+                //.ForMember(dto => dto.Address.Street,
+                //    config =>
+                //        config.MapFrom(r => r.Street))
+                .ForMember(dto => dto.FirstName,
+                config =>
+                    config.MapFrom(r => r.FirstName));
+
+
+
         }
     }
 }

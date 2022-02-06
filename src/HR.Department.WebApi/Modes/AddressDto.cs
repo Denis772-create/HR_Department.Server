@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HR.Department.Core.Entities;
 using HR.Department.Core.Entities.ValueObjects;
 using HR.Department.WebApi.Mappings;
 

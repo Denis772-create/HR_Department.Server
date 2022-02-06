@@ -8,9 +8,6 @@ namespace HR.Department.Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Position> builder)
         {
-            //var navigation = builder.Metadata.FindNavigation(nameof(Position.Employees));
-            //navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
-
             builder.HasMany(p => p.Employees)
                 .WithMany(e => e.Positions)
                 .UsingEntity<PositionEmployee>(

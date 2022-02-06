@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\HR.Department.Infrastructure\HR.Department.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\HR.Department.WebApi\HR.Department.WebApi.csproj" />
+    <ProjectReference Include="..\..\src\HRD.Core\HR.Department.Core.csproj" />
   </ItemGroup>
 
 </Project>

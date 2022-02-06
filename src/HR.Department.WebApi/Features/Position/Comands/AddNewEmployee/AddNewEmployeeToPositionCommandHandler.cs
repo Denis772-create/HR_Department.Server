@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using HR.Department.Core.Entities.ValueObjects;
+using HR.Department.Core.Exeptions;
 using HR.Department.Core.Interfaces;
 using HR.Department.Core.Specifications;
 using MediatR;
 
-namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
+namespace HR.Department.WebApi.Features.Position.Comands.AddNewEmployee
 {
     public class AddNewEmployeeToPositionCommandHandler : IRequestHandler<AddNewEmployeeToPositionCommand>
     {
@@ -24,9 +24,10 @@ namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
         public async Task<Unit> Handle(AddNewEmployeeToPositionCommand request, CancellationToken cancellationToken)
         {
             var position = await _posRepository.GetByIdAsync(request.PositionId, cancellationToken);
+            if (position is null) throw new NotFoundException(default, default);
 
             var employeeByPhoneSpecification = new EmployeeByPhoneSpecification(request.Phone);
-            var employee = await _emplRepository.GetBySpecAsync(employeeByPhoneSpecification);
+            var employee = await _emplRepository.GetBySpecAsync(employeeByPhoneSpecification, cancellationToken);
 
             if (employee == null)
             {

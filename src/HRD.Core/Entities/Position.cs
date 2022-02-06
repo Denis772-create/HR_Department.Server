@@ -20,10 +20,10 @@ namespace HR.Department.Core.Entities
             TypePositionId = typePositionId;
             Description = description;
         }
-        public Position(string description)
-        {
+        public Position(string description)=>
             Description = description;
-        }
+
+        public Position() { }
 
         public void AddEmployee(Employee employee)
         {

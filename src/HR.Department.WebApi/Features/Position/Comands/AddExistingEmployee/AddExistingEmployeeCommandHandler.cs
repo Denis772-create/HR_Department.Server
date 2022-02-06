@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using HR.Department.Core.Entities.ValueObjects;
 using HR.Department.Core.Interfaces;
 using HR.Department.Core.Specifications;
 using MediatR;

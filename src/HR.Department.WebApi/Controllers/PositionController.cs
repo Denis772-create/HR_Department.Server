@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using HR.Department.WebApi.Features.Position.Comands.AddEmployee;
 using HR.Department.WebApi.Features.Position.Comands.AddExistingEmployee;
+using HR.Department.WebApi.Features.Position.Comands.AddNewEmployee;
 using HR.Department.WebApi.Features.Position.Comands.CreatePosition;
 using HR.Department.WebApi.Features.Position.Comands.DeleteEmployee;
 using HR.Department.WebApi.Features.Position.Comands.DeletePosition;
@@ -37,15 +37,6 @@ namespace HR.Department.WebApi.Controllers
             return Ok(await Mediator.Send(command));
         }
 
-        [HttpPut("{positionId}/{employeeId}")]
-        public async Task<IActionResult> AddExistingEmployeeToPosition(Guid positionId,
-            Guid employeeId) =>
-            Ok(await Mediator.Send(new AddExistingEmployeeCommand
-            {
-                PositionId = positionId,
-                EmployeeId = employeeId
-            }));
-
         [HttpPost("new/employee")]
         [Validation]
         public async Task<IActionResult> AddNewEmployeeToPosition(
@@ -55,8 +46,19 @@ namespace HR.Department.WebApi.Controllers
             return Ok(await Mediator.Send(command));
         }
 
+        [HttpPut("{positionId}/{employeeId}")]
+        public async Task<IActionResult> AddExistingEmployeeToPosition(Guid positionId,
+            Guid employeeId) =>
+            Ok(await Mediator.Send(new AddExistingEmployeeCommand
+            {
+                PositionId = positionId,
+                EmployeeId = employeeId
+            }));
+
         [HttpPut]
-        public async Task<IActionResult> UpdatePosition([FromBody] PositionForUpdateDto forUpdateDto)
+        [Validation]
+        public async Task<IActionResult> UpdatePosition(
+            [FromBody] PositionForUpdateDto forUpdateDto)
         {
             var command = _mapper.Map<UpdatePositionCommand>(forUpdateDto);
             return Ok(await Mediator.Send(command));

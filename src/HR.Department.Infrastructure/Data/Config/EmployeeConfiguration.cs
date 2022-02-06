@@ -8,9 +8,6 @@ namespace HR.Department.Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Employee> builder)
         {
-            //var navigation = builder.Metadata.FindNavigation(nameof(Employee.Positions));
-            //navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
-            
             builder.Property(e => e.RequiredSalary)
                 .HasColumnType("decimal(18,2")
                 .IsRequired();
@@ -24,6 +21,9 @@ namespace HR.Department.Infrastructure.Data.Config
             builder.Property(e => e.Phone)
                 .HasMaxLength(20)
                 .IsRequired(false);
+
+            builder.Property(e => e.Age)
+                .HasDefaultValue(0);
 
             builder.OwnsOne(e => e.Address, a =>
             {

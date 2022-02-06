@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace HR.Department.WebApi.Features.Position.Comands.AddEmployee
+namespace HR.Department.WebApi.Features.Position.Comands.AddNewEmployee
 {
     public class AddNewEmployeeToPositionCommand : IRequest
     {

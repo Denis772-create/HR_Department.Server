@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\HR.Department.Infrastructure\HR.Department.Infrastructure.csproj" />
     <ProjectReference Include="..\HRD.Core\HR.Department.Core.csproj" />
   </ItemGroup>

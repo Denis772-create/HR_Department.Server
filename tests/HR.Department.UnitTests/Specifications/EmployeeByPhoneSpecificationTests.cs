@@ -9,7 +9,9 @@ namespace HR.Department.UnitTests.Specifications
 {
     public class EmployeeByPhoneSpecificationTests : BaseTest
     {
-        private readonly string _phoneEmployeeA = Faker.Phone.PhoneNumber();
+        private readonly string _phoneEmployeeA; 
+        public EmployeeByPhoneSpecificationTests() =>
+            _phoneEmployeeA = Faker.Phone.PhoneNumber();
 
         [Fact]
         public void GetOneEmployeeByPhone_Success()

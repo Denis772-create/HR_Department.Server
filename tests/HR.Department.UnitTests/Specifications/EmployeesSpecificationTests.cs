@@ -35,10 +35,10 @@ namespace HR.Department.UnitTests.Specifications
             var positionB = Substitute.For<Core.Entities.Position>();
             positionB.Id.Returns(Guid.NewGuid());
 
-            var employeeA = new Core.Entities.Employee();
+            var employeeA = FakeEmployee.Valid.Generate();
             employeeA.AddPosition(positionA);
 
-            var employeeB = new Core.Entities.Employee();
+            var employeeB = FakeEmployee.Valid.Generate();
             employeeA.AddPosition(positionB);
 
             listEmployees.AddRange(new List<Core.Entities.Employee>()

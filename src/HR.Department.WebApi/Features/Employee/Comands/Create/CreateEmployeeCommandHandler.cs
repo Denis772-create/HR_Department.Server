@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using HR.Department.Core.Interfaces;
@@ -22,7 +21,7 @@ namespace HR.Department.WebApi.Features.Employee.Comands.Create
         public async Task<EmployeeDto> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var employeeEntity = _mapper.Map<Core.Entities.Employee>(request.EmployeeDto);
-            
+
             await _repository.AddAsync(employeeEntity, cancellationToken);
 
             return request.EmployeeDto;

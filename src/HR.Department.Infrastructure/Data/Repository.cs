@@ -7,10 +7,8 @@ namespace HR.Department.Infrastructure.Data
 {
     public class Repository<T> : RepositoryBase<T>, IReadRepository<T>, IRepository<T> where T : class
     {
-        public Repository(DepartmentContext dbContext) : base(dbContext)
-        {
+        public Repository(DepartmentContext dbContext) : base(dbContext)=>
             PositionEmployees = dbContext.PositionEmployees;
-        }
         public DbSet<PositionEmployee> PositionEmployees { get; set; }
     }
 }
