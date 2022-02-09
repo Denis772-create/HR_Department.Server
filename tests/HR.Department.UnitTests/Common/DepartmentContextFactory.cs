@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HR.Department.Core.Entities;
 using HR.Department.Core.Entities.ValueObjects;
+using HR.Department.Infrastructure;
 using HR.Department.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

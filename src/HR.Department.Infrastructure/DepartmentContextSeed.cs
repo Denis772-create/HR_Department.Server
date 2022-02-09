@@ -6,7 +6,7 @@ using HR.Department.Core.Entities;
 using HR.Department.Core.Entities.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
-namespace HR.Department.Infrastructure.Data
+namespace HR.Department.Infrastructure
 {
     public class DepartmentContextSeed
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HR.Department.Infrastructure.Data.Config
+namespace HR.Department.Infrastructure.Config
 {
     public class PositionConfiguration : IEntityTypeConfiguration<Position>
     {

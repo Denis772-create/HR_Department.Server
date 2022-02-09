@@ -1,10 +1,7 @@
 ﻿using System;
-using Bogus.DataSets;
 using FluentAssertions;
 using HR.Department.UnitTests.Common;
-using NSubstitute.ExceptionExtensions;
 using Xunit;
-using HR.Department.Core.Entities.ValueObjects;
 using Address = HR.Department.Core.Entities.ValueObjects.Address;
 
 namespace HR.Department.UnitTests.Domain.Entities

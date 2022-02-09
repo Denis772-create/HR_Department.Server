@@ -1,7 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using HR.Department.Infrastructure;
+using HR.Department.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +14,16 @@ namespace HR.Department.WebApi.Extensions
 {
     public static class ServiceExtensions
     {
+        public static void AddDbContext(this IServiceCollection services, string connectionString)
+        {
+            services.AddDbContext<DepartmentContext>(options =>
+            {
+                options.UseSqlServer(connectionString, b =>
+                    b.MigrationsAssembly(typeof(DepartmentContext).Assembly.GetName().Name));
+                options.UseLazyLoadingProxies();
+            });
+        }
+
         public static void ConfigureSwagger(this IServiceCollection services) =>
             services.AddSwaggerGen(c =>
             {

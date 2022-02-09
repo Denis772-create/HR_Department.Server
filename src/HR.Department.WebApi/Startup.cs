@@ -1,12 +1,9 @@
-using System.Reflection;
-using HR.Department.Core.Behaviors;
+using HR.Department.Core.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using HR.Department.Infrastructure;
-using HR.Department.WebApi.Mappings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,10 +13,8 @@ namespace HR.Department.WebApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) =>
             Configuration = configuration;
-        }
 
         public IConfiguration Configuration { get; }
 
@@ -29,18 +24,17 @@ namespace HR.Department.WebApi
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
-            services.AddAutoMapper(config =>
-                config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly())));
+            services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddMediatR(typeof(IRepository<>).Assembly);
+            services.AddCoreServices();
 
             services.Configure<ApiBehaviorOptions>(options =>
                 options.SuppressModelStateInvalidFilter = true);
 
-            services.AddDbContext(Configuration.GetConnectionString("DefaultConnection"));
             services.ConfigureJwt(Configuration);
+
             services.ConfigureCors();
+
             services.ConfigureSwagger();
         }
 

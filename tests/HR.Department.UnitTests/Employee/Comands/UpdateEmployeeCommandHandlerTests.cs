@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Bogus;
 using HR.Department.Core.Interfaces;
 using HR.Department.UnitTests.Common;
 using NSubstitute;

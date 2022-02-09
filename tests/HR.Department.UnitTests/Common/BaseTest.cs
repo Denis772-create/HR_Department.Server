@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Bogus;
+using HR.Department.Infrastructure;
 using HR.Department.Infrastructure.Data;
 using HR.Department.UnitTests.Domain.FakeData;
 using HR.Department.WebApi;
