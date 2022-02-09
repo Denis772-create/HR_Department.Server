@@ -20,10 +20,9 @@ namespace HR.Department.Infrastructure.Data.Config
 
             builder.Property(e => e.Phone)
                 .HasMaxLength(20)
-                .IsRequired(false);
+                .IsRequired();
 
-            builder.Property(e => e.Age)
-                .HasDefaultValue(0);
+            builder.Property(e => e.Age);
 
             builder.OwnsOne(e => e.Address, a =>
             {

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using HR.Department.Core.Interfaces;
 
 namespace HR.Department.WebApi.Mappings
 {
@@ -21,7 +22,7 @@ namespace HR.Department.WebApi.Mappings
             {
                 var instance = Activator.CreateInstance(type);
                 var methodInfo = type.GetMethod("Mapping");
-                methodInfo.Invoke(instance, new object?[] {this});
+                methodInfo?.Invoke(instance, new object[] { this });
             }
         }
     }

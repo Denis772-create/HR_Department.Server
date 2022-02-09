@@ -3,11 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.Specification;
 using FluentAssertions;
+using HR.Department.Core.Dto;
 using HR.Department.Core.Interfaces;
+using HR.Department.Core.Queries.Employee.GetEmployeeListByIdPosition;
 using HR.Department.Core.Specifications;
 using HR.Department.UnitTests.Common;
-using HR.Department.WebApi.Features.Employee.Queries.GetEmployeeListByIdPosition;
-using HR.Department.WebApi.Modes;
 using NSubstitute;
 using Xunit;
 
@@ -38,7 +38,7 @@ namespace HR.Department.UnitTests.Employee.Queries
 
             //Assert
             result.EmployeeList.Count.Should().Be(1);
-            result.Should().BeOfType(typeof(EmployeeListVm));
+            result.Should().BeOfType(typeof(EmployeeListDto));
 
         }
     }

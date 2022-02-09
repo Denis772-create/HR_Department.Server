@@ -1,11 +1,11 @@
 using System.Reflection;
+using HR.Department.Core.Behaviors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using HR.Department.Infrastructure;
-using HR.Department.WebApi.Behaviors;
 using HR.Department.WebApi.Mappings;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

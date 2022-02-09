@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using HR.Department.WebApi.Features.Position.Comands.AddExistingEmployee;
-using HR.Department.WebApi.Features.Position.Comands.AddNewEmployee;
-using HR.Department.WebApi.Features.Position.Comands.CreatePosition;
-using HR.Department.WebApi.Features.Position.Comands.DeleteEmployee;
-using HR.Department.WebApi.Features.Position.Comands.DeletePosition;
-using HR.Department.WebApi.Features.Position.Comands.UpdatePosition;
-using HR.Department.WebApi.Features.Position.Queries.GetAllTypePositions;
-using HR.Department.WebApi.Features.Position.Queries.GetPositionList;
+using HR.Department.Core.Commands.Position.AddExistingEmployee;
+using HR.Department.Core.Commands.Position.AddNewEmployee;
+using HR.Department.Core.Commands.Position.CreatePosition;
+using HR.Department.Core.Commands.Position.DeleteEmployee;
+using HR.Department.Core.Commands.Position.DeletePosition;
+using HR.Department.Core.Commands.Position.UpdatePosition;
+using HR.Department.Core.Dto;
+using HR.Department.Core.Queries.Position.GetAllTypePositions;
+using HR.Department.Core.Queries.Position.GetPositionList;
 using HR.Department.WebApi.Filters.ActionFilters;
-using HR.Department.WebApi.Modes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HR.Department.WebApi.Controllers
@@ -22,7 +22,7 @@ namespace HR.Department.WebApi.Controllers
         public PositionController(IMapper mapper) => _mapper = mapper;
 
         [HttpGet]
-        public async Task<ActionResult<PositionListVm>> GetAll() =>
+        public async Task<ActionResult<PositionListDto>> GetAll() =>
             Ok(await Mediator.Send(new GetPositionListQuery()));
 
         [HttpGet("types")]

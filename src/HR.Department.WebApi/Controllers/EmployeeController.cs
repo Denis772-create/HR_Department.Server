@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using HR.Department.WebApi.Features.Employee.Comands.Create;
-using HR.Department.WebApi.Features.Employee.Comands.Update;
-using HR.Department.WebApi.Features.Employee.Queries.GetAllQuery;
-using HR.Department.WebApi.Features.Employee.Queries.GetEmployeeListByIdPosition;
-using HR.Department.WebApi.Features.Position.Comands.UpdateSalaryForEmloyees;
+using HR.Department.Core.Commands.Employee.Create;
+using HR.Department.Core.Commands.Employee.Update;
+using HR.Department.Core.Commands.Position.UpdateSalaryForEmloyees;
+using HR.Department.Core.Dto;
+using HR.Department.Core.Queries.Employee.GetAllQuery;
+using HR.Department.Core.Queries.Employee.GetEmployeeListByIdPosition;
 using HR.Department.WebApi.Filters.ActionFilters;
-using HR.Department.WebApi.Modes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HR.Department.WebApi.Controllers
@@ -14,11 +14,11 @@ namespace HR.Department.WebApi.Controllers
     public class EmployeeController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<EmployeeListVm>> GetAll() =>
+        public async Task<ActionResult<EmployeeListDto>> GetAll() =>
             Ok(await Mediator.Send(new GetEmployeeListQuery()));
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmployeeListVm>> GetByIdPosition(Guid id) =>
+        public async Task<ActionResult<EmployeeListDto>> GetByIdPosition(Guid id) =>
             Ok(await Mediator.Send(new GetEmployeeListByIdPositionQuery
             {
                 PositionId = id
